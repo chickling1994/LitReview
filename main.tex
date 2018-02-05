@@ -129,8 +129,8 @@
 %----------------------------------------------------------------------------------------
 \chapter{Introduction}
 Interferometry is a powerful diagnostic technique that is currently employed on nearly all experimental fusion reactors worldwide. In some cases the interferometer system is part of the real time diagnostics, and the reactor will not be allowed to function without it, for safety reasons. For the purposes of this literature review, the reactor MAST (Mega Amp Spherical TOKAMAK) will be used, as this is the reactor that the system will be implemented on.\\
-The current interferometer system in place on MAST was designed by Jakob Brunner, as part of his PhD project \cite{Brunner2017}. The thesis brought up main concerns about the use of a CO$_{2}$ laser brings up many safety issues, that result in there only being potential for one interferometer to be used. This means that only a single line profile of density can be obtained within the reactor. This is not a good representation of the density fluctuations in the reactor, and also only passes through the bulk plasma.\\
-The intention of this project is to replace the CO$_{2}$ laser with a 1550nm laser produced by Koheron \cite{KoheronLaserV1} along with Koheron's InGaAs photo detectors \cite{KoheronPD100Photodetector} as this will improve safety of the system which will allow multiple interferometers to be installed looking through various line of sights in MAST-U (MAST-Upgrade). Since this set-up also doesn't require a glass viewing port as the CO$_{2}$ laser does, this can allow for the interferometer to also pass through more interesting (density wise) points of the plasma, e.g. the divertor.
+The current interferometer system in place on MAST was designed by Jakob Brunner, as part of his PhD project \cite{Brunner2017}. The thesis discusses the fundamentals and operation of the system. It also discusses many of the features that make the use of a $CO_{2}$ laser not ideal from a logistics and safety point of view, which results in only a single interferometer being in place on the reactor. This means that only a single line profile of density can be obtained within the reactor. This is not a good representation of the density fluctuations in the reactor, and also only passes through the bulk plasma.\\
+The intention of this project is to test a new system that could replace the two colour system with with a 1550nm laser produced by Koheron \cite{KoheronLaserV1} along with Koheron's InGaAs photo detectors \cite{KoheronPD100Photodetector}. This will result in the system being more compact which will allow easier development of multiple lines of sight in addition to improving the safety of the system. Since this set-up also doesn't require a glass viewing port as the CO$_{2}$ laser does, this can allow for the interferometer to also pass through more interesting (density wise) points of the plasma, e.g. the divertor.
 
 %----------------------------------------------------------------------------------------
 %	Lit Review
@@ -154,20 +154,29 @@ The amount of energy released from a nuclear fusion reaction is dictated by the 
 As shown in \autoref{bindingenergy}, lighter elements have far less binding energy per nuclear than heavier elements. This means that, for example, combining two Hydrogen$^{1}$ atoms together will result in a Hydrogen$^{2}$ atom, plus an amount of energy that is released.
 
 \begin{equation}
-{^{1}H} + {^{1}H} = {^{2}_{1}H} + {^{1}_{0}e} + {\nu}^{-} + Energy
+{^{1}H} + {^{1}H} = {^{2}_{1}H} + {^{1}_{0}e} + {\nu}^{-} + 0.42MeV
+\label{eq:H-H}
 \end{equation}
 \\
-This process continues but with exponentially decreasing energy release up to iron. Iron is the heaviest element that can be achieved via fusion while still having a positive net energy output. The largest amount of energy from a single reaction can be achieved by fusing two atoms and gaining the largest mass deficit possible. The largest of these being a Deuterium-Tritium (D-T) reaction \cite[p. 430]{Shultis2016FundamentalsEdition.}:
+The Equation \ref{eq:H-H} is known as a H-H reaction. This process continues but with exponentially decreasing energy release up to iron. Iron is the heaviest element that can be achieved via fusion while still having a positive net energy output. The largest amount of energy from a single reaction can be achieved by fusing two atoms and gaining the largest mass deficit possible. The largest of these being a Deuterium-Tritium (D-T) reaction \cite[p. 430]{Shultis2016FundamentalsEdition.}:
 
 \begin{equation}
 {^{2}_{1}H} + {^{3}_{1}H} = {^{4}_{2}He} + {^{1}_{0}n} + 14.1MeV
+\label{eq:D-T}
 \end{equation}
 
-In this reaction, the neutron inherits the energy as kinetic energy. Very few reactors worldwide have attempted a D-T reaction, but those that have suffered significant damage from the high powered neutrons that have been released.
+In this reaction, the neutron inherits the energy as kinetic energy. Conveniently, the D-T reaction also has a high cross section for conditionality combined with a higher probability of the reaction occurring than other considered fuel sources such as H-H or D-D. This was shown in a paper by Lawson \cite{Christopherson1957SomeReactor} to be an inequality to represent the combination between temperature and reaction time. Very few reactors worldwide have attempted a D-T reaction, but those that have suffered significant damage from the high powered neutrons that have been released.
 
 	\section{Tokamak}
 Tokamak is an loosely translated acronym for a device developed by soviet Russia in the 1960's, it stands for \textbf{TO}roidal \textbf{CHA}mber with \textbf{MA}gnetic \textbf{C}oils. First results from such a machine were published in 1969 by two Russian scientists, Sakharov and Tamm \cite{Tamm1959TheoryI}. The Russian team managed to produce plasmas of a much higher stability than previously seen, and at temperatures up to 10 times higher than previously achieved. Since then, TOKAMAK development has been progressing, solving one problem at a time, but uncovering many new challenges in the fields of engineering, materials research and plasma physics \cite{Smirnov2010Tokamak19501990}.\\
 
+\begin{figure}[H]
+\includegraphics[width=\textwidth, center,angle=0]{Images/Tokamak.jpg}
+\caption{A schematic generalised Tokamak showing key features to its operation and function \cite{TokamakEUROfusion}.}
+\label{fig:Tokamakschem}
+\end{figure}
+
+As shown in \autoref{fig:Tokamakschem} a Tokamak is a collection of Toroidal and Poloidal magnets to generate a helical magnetic field. This is in combination with a central coil which acts as a primary transformer circuit, and the plasma, which when moving acts as a secondary transformer circuit. The magnets create magnetic pressure in accordance to 
 In general, the longer that a fusion plasma can be confined (under fusion conditions), the more probability of fusion reactions taking place. There are two main ways to increase confinement time; an increase of radius of a reactor or an increase in magnetic pressure. Magnets are currently approaching the limit of what we can achieve with superconducting technology, so the favoured solution is to increase the size of the reactor. For the purposes of analysing plasma phenomena and performing research a reactor just the right size to fit on all the diagnostics required is adequate, which is the reason behind the building of MAST \cite{Chapman2015OverviewResults}\\
 
 MAST is currently in the process of being upgraded into MAST-U, where is will have many improved features including a new divertor region that allows for more complex plasma configurations and longer path length, which allows the plasma to slow down (and cool down) before striking the divertor plate (\autoref{mastdivertors}, \cite{CulhamCenterforFusionEnergyResearch:Upgrade})
@@ -185,25 +194,91 @@ There are many forms of diagnostics in a fusion reactor. These can be separated 
 One of the main challenges of fusion research, currently, is to limit instabilities generated by Edge Localised Modes (ELMs). This is a disruptive instability that occurs in the edge of a reactor plasma. These instabilities can seriously damage the reactor wall (particularly divertor plates) as well as causing massive energy losses of the plasma. Ultimately instabilities such as this limit the time that a fusion reactor can run for.
 	
 	\section{Basic Interferometry}
+Interferometry is a method that has been used as a precise measuring tool for many real world applications at many scales such as the detection of gravitational waves \cite{AbbottObservationMerger} all the way down to the measurement of the velocity of blood using Optical Coherence Tomography \cite{Zhao2000Phase-resolvedSensitivity}. As will be discussed in subsequent chapters, it is a powerful diagnostic technique for fusion reactors.
+\begin{figure}[H]
+\includegraphics[width=1\textwidth, center,angle=0]{Images/michelsonint.png}
+\caption{A standard michelson interferometer experiment where a sodium lamp is used because of its narrow bandwidth. The movable mirror can be translated to produce constructions and de-constructions of interference fringes as can be seen on the viewing plate. The compensator is to account for the additional pass the movable mirror makes through the glass of the beam splitter so both paths are exposed to the same refractive index \cite{Michelsonimage}.}
+\label{fig:michelsonint}
+\end{figure}
+
+Interferometery was first developed by Michelson and Morley \cite{Michelson1887RelativeEther} and it is the process by which two light waves interact with each other causing interference. In a standard Michelson interferometer, as show in \autoref{fig:michelsonint} , two beams of light go along differing paths and then recombine before being observed. If these paths are of a different length, which can be achieved by using a movable mirror, then a path difference can cause a change in the interference pattern seen. A plane wave can first originally be described as: 
+
+\begin{equation}
+E(x,t) = E_{0}\cos{\omega t - kx}
+	\label{eq:planewave}
+\end{equation}
+Where A is amplitude, E is the maximum amplitude of the wave, $\omega$ is the frequency and $k = \frac{2\pi}{\lambda}$, $t$ and $x$ are the positions of the wave in time and 1 dimension, respectively.
+Where the overall intensity of the wave can be written as:
+\begin{equation}
+I \propto <E^{2}>
+	\label{eq:intensitypw}
+\end{equation}
+Since this wave originates from a single light source, but is split into two different beam paths which travel independent distances this can then be described as:
+\begin{equation}
+E_{1}(x,t) = \frac{E_{0}}{\sqrt[]{2}}\cos{\Big(\omega t - k(2L_{1} - L_{o})\Big)}
+	\label{eq:planewave1}
+\end{equation}
+and
+\begin{equation}
+E_{2}(x,t) = \frac{E_{0}}{\sqrt[]{2}}\cos{\Big(\omega t - k(2L_{2} - L_{o})\Big)}
+	\label{eq:planewave2}
+\end{equation}
+Where $L_{1}$ and $L_{2}$ are the distances from the beam splitter to each mirror, respectively, and $L_{o}$ is the distance from the beam splitter to the observer.
+By combining the waves described by equations \ref{eq:planewave1} and \ref{eq:planewave2} together the superposition of the waves can be described by the following equation at the point of the viewing plate:
+\begin{equation}
+I_{v} = I_{0} \cos^{2}{\Big(\frac{2\pi}{\lambda}(L_{1} - L_{2})\Big)}
+	\label{eq:finalwave}
+\end{equation}
+This shows us that maxima and minima can be seen when the $\cos^{2}$ function is equal to 1 or -1 and such the following relationships can be stated:
+\begin{equation}
+Maximum: \Delta L = L_{1} - L_{2} = \frac{n*\lambda}{2}
+	\label{eq:fringesmax}
+\end{equation}
+\begin{equation}
+Minimum: \Delta L = L_{1} - L_{2} = \frac{(n+\frac{1}{2})*\lambda}{2}
+	\label{eq:fringesmin}
+\end{equation}
+Where $n = 0, 1, 2, 3, ...$ \\
+As such, this shows that the maximum and minimum will occur if there are changes in length of one of the beam paths. The difference between a maximum and a minimum in this system always relates to a distance of a half wavelength, hence, by knowing the wavelength of the light, the displacement of the mirror can be known.\\
+
+	\subsection{Heterodyne Interferometry}
+The phase change information caused by a moving mirror can also be gathering by using the doppler effect of light. Unfortunately, currently electrical components cannot measure the temporal resolution with the required sensitivity to see this effect with a single wavelength, so a second is implemented. A heterodyne interferometer is a system that that uses two different wavelength light sources into a single interferometer set up. When the the two different frequencies of light strike the mirror and then re-interfere a beat frequency is produced. This beat frequency can be observed on a much smaller frequency scale yet still has the same relationship to the movement of the mirror.
+
+\begin{figure}[H]
+\includegraphics[width=1\textwidth, center,angle=0]{Images/heterodyne_system.jpg}
+\caption{Schematic of a standard heterodyne displacement measuring system where a reference mirror is used to account for an identical beam path length and the second mirror is the addition of the original frequency to a doppler shift caused by the mirror moving \cite{HeterodyneInterferometer}.}
+\label{fig:heterodynesystem}
+\end{figure}
+
+As can be seen in \autoref{fig:heterodynesystem}, the fundamental setup is identical to the Michelson Interferometer, but with the addition of a two-frequency laser. This results in the movable mirror causing a frequency shift in the frequency $f_{2}$ by $\Delta f$. This results in the relationship to the beat frequency:
+\begin{equation}
+f_{beat} = f_{1} - (f_{2} + \Delta f)
+	\label{eq:dopplershift}
+\end{equation}
+Heterodyne interferometery has some clear advantages over homodyne, in that it is less sensitive to laser power fluctuations, ambient light and other noise inputs into the system. Only a single detector is needed to detect the direction and the magnitude of the displacement of the mirror. This does come at the cost that a very precise two-wavelength laser is required for good results along with more complex forms of data handling and electrical components.
+    \subsection{Old Heterodyne Interferometry}
+A heterodyne interferometer is a system that applies two different wavelength light sources into a single interferometer system. When the light interferes a beat frequency is produced which can be used to compute the phase difference between the two light sources. This is done with little dependence on the signal amplitude, and so the strength of the signal is of little relevance so long as the wavelengths are unique and can be distinguished from a background. In addition to the physical benefits, this optical set up can also be applied to negate certain engineering effects created by the system. One issue which was found in early research is that fusion reactors actually vibrate with a specific frequency and in some cases can shift several millimetres relative to the beam path. This means that the effect of this vibration cant be differentiated from a change in density of the plasma. One way that has been found to counter this is two employ a two colour system where one laser has strong interaction with the plasma, and the other laser has weak or little interaction with it, these are usually a mid-infrared (e.g. CO$_{2}$) and a visible (HeNe). This results in the visible laser having a phase change relative to the vibration of the reactor, and the mid-infrared has phase changes resulting from the plasma and the reactor. If these two laser systems follow identical beam paths and are calibrated correctly, the phase of the visible can be subtracted from the phase of the mid-infrared resulting in the phase change caused by the plasma alone.\\
+
+\section{extra int stuff}
 Interferometry is a method by which time-integrated plasma density can be obtained. An interferometer, by design, is an incredibly sensitive piece of measuring apparatus. They work on the principle of interference between two laser beam paths. If a laser is split into two beam paths of uneven lengths, an interference pattern will form if they are recombined. The rate at which this interference pattern "chirps" (A creation or destruction of a waveform takes place) is proportional to the difference in path length of the arms. If, for example, the path lengths were identical, no interference would take place upon recombination. By inserting a plasma into one of these arms a path difference will become apparent. This path difference is proportional to the line-integrated density of the plasma. This is due to the density-dependant refractive index of the plasma. A larger density results in a larger refractive index, and hence the laser has an apparent path of greater length than before.
 
 In a plasma the optical path in a double pass interferometer (passing through the plasma twice) can be calculated according to the following equation \cite[p.~26]{Brunner2017} :
 
 \begin{equation}
 	\Delta s = 2 \int_{0}^{L} [N_{air} - N_{pl}(l)]dl \approx 2 \int_{0}^{L} \Bigg[1 - \sqrt[]{1-\frac{\omega_{pe}^{2}}{\omega^{2}}}\Bigg]
-	\label{opticalpathint}
+	\label{eq:opticalpathint}
 \end{equation}
 
 Where $N_{pl}$ denotes the plasma's refractive index that already includes the visible light approximation. $N_{air}$ is the refractive index of air. $\omega$ is the frequency of the laser and $\omega_{pe}$ is the frequency of the plasma. This can then be expanded by assuming that the plasma frequency is much less than the frequency of the laser to achieve:
 
 \begin{equation}
 	\Delta\phi_{pl} \approx \frac{\lambda e^{2}}{2 \pi c^{2} \epsilon_{0} m_{e}} \int_{0}^{L} n_{pl} (l) dl
-	\label{phase}
+	\label{eq:plasmaphase}
 \end{equation}
 
 \begin{equation}
 	\int_{0}^{L} n_{pl} (l) dl = \frac{2 \pi c^{2} \epsilon_{0} m_{e}}{\lambda e^{2}} \Delta\phi_{pl} = \frac{\lambda n_{c}}{2 \pi} \Delta\phi_{pl}
-	\label{phaseintegral}
+	\label{eq:phaseintegral}
 \end{equation}
 \\
 Where $\Delta\phi_{pl}$ is the phase difference between the two interferometer arms. $\lambda$ is the wavelength of the laser used. e and c are the electron charge and the speed of light in a vacuum, respectively. $\epsilon$ permittivity of free space and $m_{e}$ is the mass of the electron. $n{pl}$ is the density of the plasma, which in an ideal hydrogen plasma can be defined entirely by the density of the electrons as the Debye length of the ions is on too large a scale for the measurement to make a contribution. 
@@ -217,32 +292,49 @@ This now gives a viable way to calculate the change in phase of a laser passing 
 \label{mzint}
 \end{figure}
 
-	\subsection{Heterodyne Interferometry}
-A heterodyne (two colour) interferometer is a system that applies two different wavelength light sources into a single interferometer system. When the light interferes a beat frequency is produced which can be used to compute the phase difference between the two light sources. This is done with little dependence on the signal amplitude, and so the strength of the signal is of little relevance so long as the wavelengths are unique and can be distinguished from a background. In addition to the physical benefits, this optical set up can also be applied to negate certain engineering effects created by the system. One issue which was found in early research is that fusion reactors actually vibrate with a specific frequency and in some cases can shift several millimetres relative to the beam path. This means that the effect of this vibration cant be differentiated from a change in density of the plasma. One way that has been found to counter this is two employ a two colour system where one laser has strong interaction with the plasma, and the other laser has weak or little interaction with it, these are usually a mid-infrared (e.g. CO$_{2}$) and a visible (HeNe). This results in the visible laser having a phase change relative to the vibration of the reactor, and the mid-infrared has phase changes resulting from the plasma and the reactor. If these two laser systems follow identical beam paths and are calibrated correctly, the phase of the visible can be subtracted from the phase of the mid-infrared resulting in the phase change caused by the plasma alone.\\
-
-	\section{Measuring Displacement using Heterodyne Interferometry}
-By comparing the signal between two different detectors that are suited for each wavelength of the heterodyne system information can be extracted regarding the difference in phase. This will result in a time-varying signal on both the scene and the reference arm of the interferometer which can be calculated using a series of equations in the form of \cite{WuHeterodyneNanometrology}
+	\section{Measuring Phase using Heterodyne Interferometry}
+There are two causes for a change in optical path in an interferometer system; a change in refractive index, or a change in physical length. Both of these are occurring simultaneously within a reactor and so both have to be accounted for. This can be done by considering the measured phase different between two lasers in a heterodyne system to be a superposition of these two phenomena:
 
 \begin{equation}
-	I{_{s}} \propto A{_{s}}\cos{(\Delta\omega t + \phi{t})}
-    \label{SceneInt}
+	\Delta\phi = \Delta\phi_{pl} + \Delta\phi_{vib}
+	\label{eq:superposphasediff}
 \end{equation}
-and
+Where $\phi$ is the total phase change, and $\Delta\phi_{pl}$ and $\Delta\phi_{vib}$ are the phase changes caused by the plasma and the vibrations of the machine respectively. Because a change in length causes a linear change in phase for a laser that interacts strongly with the wall, the change in phase due to the vibrations can easily be characterised by a change in length divided by the wavelength of laser sensitive to vibrations in the machine, such that:
+
 \begin{equation}
-	I{_{r}} \propto A{_{r}}\cos{(\Delta\omega t)}
-    \label{RefInt}
+	\Delta\phi_{vib} = \frac{2\pi}{\lambda} \Delta\lambda
+	\label{eq:vibphasediff}
 \end{equation}
-Where $A{_{s}}$ and $A{_{r}}$ are the amplitudes of the scene and reference arms respectively, $\omega$ is the angular frequency of the signal and $\phi$ is the phase.
 
+Combining the equation derived for a single laser passing through the plasma \ref{eq:plasmaphase}, the superposition of the vibration and plasma phase \ref{eq:superposphasediff} and the vibrational phase \ref{eq:vibphasediff} a complete equation for phase shift can be formed:
 
+\begin{equation}
+	\Delta\phi = \frac{\lambda_{s} e^{2}}{2 \pi c^{2} \epsilon_{0} m_{e}} \int_{0}^{L} n_{pl} (l) dl + \frac{2\pi}{\lambda^{r}} \Delta l
+	\label{eq:heterophasediff}
+\end{equation}
+
+Since the relationship between the phase of the two lasers observe an inversly proportional relationship it is possible for only density information $n_{pl}$ to be extracted.
+\\
+
+%By comparing the signal between two different detectors that are suited for each wavelength of the heterodyne system information can be extracted regarding the difference in phase. This will result in a time-varying signal on both the scene and the reference arm of the interferometer which can be calculated using a series of equations in the form of \cite{WuHeterodyneNanometrology}
+
+%\begin{equation}
+%	I{_{s}} \propto A{_{s}}\cos{(\Delta\omega t + \phi{t})}
+%    \label{SceneInt}
+%\end{equation}
+%and
+%\begin{equation}
+%	I{_{r}} \propto A{_{r}}\cos{(\Delta\omega t)}
+%    \label{RefInt}
+%\end{equation}
+%Where $A{_{s}}$ and $A{_{r}}$ are the amplitudes of the scene and reference arms respectively, $\omega$ is the angular frequency of the signal and $\phi$ is the phase.
     
-    
-The general equation to extract the plasma density from a heterodyne system \cite{Esteban2010ContinuousFPGAs} is given by \autoref{eq:density}. A full derivation can be found in Jakob Brunner's Thesis \cite[p. 22-29]{Brunner2017}
+%The general equation to extract the plasma density from a heterodyne system \cite{Esteban2010ContinuousFPGAs} is given by \autoref{eq:density}. A full derivation can be found in Jakob Brunner's Thesis \cite[p. 22-29]{Brunner2017}
 
-\begin{equation}
-	\int{n_{e}dl} = n_{e}(CO_{2})\frac{\Delta\psi_{NdYAG}\lambda_{NdYAG}-\Delta\psi_{CO_{2}}\lambda_{CO_{2}}}{2\pi}
-    \label{eq:density}
-\end{equation}
+%\begin{equation}
+%	\int{n_{e}dl} = n_{e}(CO_{2})\frac{\Delta\psi_{NdYAG}\lambda_{NdYAG}-\Delta\psi_{CO_{2}}\lambda_{CO_{2}}}{2\pi}
+%    \label{eq:density}
+%\end{equation}
 \begin{figure}[H]
 \includegraphics[width=\textwidth, center,angle=0]{Images/mastuint.JPG}
 \label{MAST-U Int}
