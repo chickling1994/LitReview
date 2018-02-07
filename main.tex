@@ -60,6 +60,9 @@
  ,doi=true        
  ,natbib=true  
 ]{biblatex}
+
+\usepackage{pgfgantt}
+
 \addbibresource{Mendeley.bib} 
 
 
@@ -95,10 +98,11 @@
 \large{A literature review submitted in partial fulfilment of the requirements for MSci Physics \\} 
 \vspace{1.5cm}
 \textbf{\Large{Christopher James Hickling}} \\
-\vspace{9cm} 
+\vspace{6.5cm} 
 
 \begin{figure}[H]
-\centering      
+\centering
+\includegraphics[width=8.5cm, height=8.5cm, keepaspectratio]{Images/CCFElogo.jpg}
 \includegraphics[width=10cm, height=10cm, keepaspectratio]{Images/ntulogo.jpg}
 \end{figure}    
 
@@ -108,7 +112,7 @@
 \large{Nottingham} \\
 \large{United Kingdom} \\
 \vspace{1cm}
-\large{2017}
+\large{2018}
 \end{titlepage}
 
 
@@ -361,7 +365,7 @@ In a plasma the optical path in a double pass interferometer (passing through th
 Where $N_{pl}$ denotes the plasma's refractive index that already includes the visible light approximation. $N_{air}$ is the refractive index of air. $\omega$ is the frequency of the laser and $\omega_{pe}$ is the frequency of the plasma. This can then be expanded by assuming that the plasma frequency is much less than the frequency of the laser to achieve:
 
 \begin{equation}
-	\Delta\phi_{pl} \approx \frac{\lambda e^{2}}{2 \pi c^{2} \epsilon_{0} m_{e}} \int_{0}^{L} n_{pl} (l) dl
+	\Delta\phi_{pl} = \frac{\lambda e^{2}}{2 \pi c^{2} \epsilon_{0} m_{e}} \int_{0}^{L} n_{pl} (l) dl
 	\label{eq:plasmaphase}
 \end{equation}
 
@@ -397,7 +401,34 @@ Combining the equation derived for a single laser passing through the plasma \re
 	\label{eq:heterophasediff}
 \end{equation}
 
-Since the relationship between the phase of the two lasers observe an inversely proportional relationship it is possible for only density information $n_{pl}$ to be extracted.
+Since the relationship between the phase of the two lasers observe an inversely proportional relationship it is possible for only density information $n_{pl}$ to be extracted. This can be done by making $\Delta l$ the subject:
+
+\begin{equation}
+	\Delta l = \frac{\Delta\phi - \frac{\lambda _{s} e^{2} \int_{0}^{L} n_{pl} (l) dl }{2 \pi c^{2} \epsilon_{0} m_{e}}}{2 \pi} 
+	\label{eq:deltal}
+\end{equation}
+
+and substituting in for the classical electron radius $r_{ce} = \frac{e^{2}}{2 \pi c^{2} \epsilon_{0} m_{e}}$ gives an equation of the form:
+
+\begin{equation}
+	\Delta l = \frac{\Delta\phi - \lambda r_{ce} \int_{0}^{L} n_{pl} (l) dl}{2 \pi}  
+	\label{eq:deltalrce}
+\end{equation}
+
+By now considering two lasers of different wavelengths, $\lambda _{1}$ and $\lambda _{2}$, that follow identical beam paths and there for the same exposure to mechanical vibrations, $\Delta l$ will be equal. These two equations can then be equated:
+
+\begin{equation}
+	\frac{\Delta\phi _{1} - \lambda _{1} r_{ce} \int_{0}^{L} n_{pl} (l) dl}{2 \pi}  = \Delta l = \frac{\Delta\phi _{2} - \lambda _{2} r_{ce} \int_{0}^{L} n_{pl} (l) dl}{2 \pi}  	\label{eq:deltalequate}
+\end{equation}
+
+and then solved for the line integrated plasma density, $\int_{0}^{L} n_{pl} (l) dl$, yielding:
+
+\begin{equation}
+\int_{0}^{L} n_{pl} (l) dl = \frac{1}{r_{ce}} \frac{\Delta\phi _{1} \lambda _{1} - \Delta\phi _{2} \lambda _{2}}{\lambda _{2}^{2} - \lambda _{1}^{2}}	
+    \label{eq:LIPD}
+\end{equation}
+
+As a result of equation \ref{eq:LIPD}, the line integrated plasma density can be calculated from two values of change in phase using two different wavelengths. This takes into account mechanical vibrations, which are factored into $\Delta \Phi$ by equation \ref{eq:superposphasediff}.
 
 	\section{Field Programmable Gate Array's (FPGA's)}
 FPGA's are a simple and effective way to collect and analyse data. They have numerous advantages over standard processing devices as they are designed to compute a single pre-programmed task, as unlike a Central Processing Unit (CPU) which is designed to use logic to solve a specific task. The use of an FPGA is becoming more common in fusion applications as the need to perform real time filtering \cite{Naylor2010AnMAST} and processing on data is becoming a greater concern for plasma control systems to allow the safe operation of reactors. Many different forms of FPGA's have been used in the fusion industry for real time application.
@@ -434,9 +465,51 @@ The Red Pitaya (RP) \cite{Leban2014RedManual} is a micro controller that has bui
 \section{Koheron}
 Koheron have developed a laser board which connects to the Red Pitaya that can simulate the AOM in \autoref{MAST-UInt}. It does this by using a fiber optic cable to generate a frequency modulation that results in a beat frequency \cite{KoheronAmplitudeKoheron}. Initial investigations at CCFE \cite{Hickling2017InvestigationMAST-U} have shown this method to show a strong interference pattern and the use of the RP and Koheron software is easy and accessible. There is a large amount of support and development occurring constantly so any new problems found can be fixed. In this investigation it was shown that the basic interferometer set up from Koheron is not currently sensitive enough to physical vibrations on the order of 10's of KHz. It was found that this may be due to the lack of any high order modulation of the laser due to an Acousto-Optical Modulator, as discussed by J. Brunner \cite[p. ~29]{Brunner2017}. Due to this, an AOM may be required for detection of the required beat frequency, however the benefits of this system are still apparent over the use of a $CO_{2}$ laser system.
 
-	\section{Aims and Objectives}
-The literature review has outlined key goals in the development and testing of a new interferometer diagnostic device.
+	\chapter{Aims and Objectives}
+The literature review has outlined key goals in the development and testing of a new interferometer diagnostic device. It is known that the device currently installed on MAST-U, while effective, has significant drawbacks. It has been shown by previous research \cite{Hickling2017InvestigationMAST-U} that the Red Pitaya / Koheron based system can measure the phase difference of a heterodyne system. It is still unknown if it can do this with enough precision to make it a valid candidate to the replacement of the interferometery system currently on MAST-U. In an attempt to characterise a new system for installation tests will need to be run to assure that the phase noise, which will ultimately dictate its effectiveness, will need to be on the order of approximately 10 milliRads in order to detect any useful densities. As such, this project will be to characterise and minimise any noise that is in this system. \\
 
+\begin{center}
+\begin{ganttchart}{1}{12}
+  \gantttitle{Aims and Objectives (Weeks)}{12} \\
+  \gantttitlelist{1,...,12}{1} \\
+  \ganttbar{Task 1}{1}{1} \\ %Lit Study
+  \ganttlinkedbar{Task 2}{2}{3} \\ %Analyse Error in free space (repeat tom)
+  \ganttlinkedbar{Task 3}{4}{5} \\ %Analyse error in fibre
+  \ganttlinkedbar{Task 4}{6}{7} \\ %increase fiber length to 25m and repeat task 3
+  \ganttlinkedbar{Task 5}{8}{9} \\ %Test on plasma at NTU?
+  \ganttlinkedbar{Task 6}{10}{12} %Documentation for CCFE and NTU
+%  \ganttmilestone{Milestone}{7} \ganttnewline
+  %\ganttlink{elem1}{elem2}
+  %\ganttlink{elem1}{elem3}
+  \end{ganttchart}
+\\
+\end{center}
+This Gantt chart to show the tasks involved in the execution of this project. Details about each individual task can be seen in \autoref{tbl:tasks}.
+\begin{center}
+\begin{table}[H]
+	\setlength\arrayrulewidth{1pt}
+    %\rowcolors{2}{gray!25}{white}
+    \begin{tabular}{|p{1cm}|p{2.5cm}|p{9cm}|p{1.5cm}|}
+    			\hline
+    	        Task & Objective & Description & Duration (Weeks)\\
+                \hline
+                1 & Literature Study & Background Study into heterodyne interferometer systems making comparisons of the benefits and drawbacks including the mathematical frame work for plasma interferometery. & 1\\
+                \hline
+                2 & Analyse the error sources using free space& Analyse standard deviation of different phase noise sources while adjusting the length of exposed free space. Decide if the laser will be appropriate for use in current state on MAST-U.  & 2\\
+                \hline
+                3 & Analyse the error sources using fibre optics& Compare results to free space using the interferometer system described in Jacob Brunners Thesis, \autocite{Brunner2017}. Attempt to achieve a phase error of 3$mRad$ or less.& 2\\
+                \hline
+                4 & Repeat Task 3 with varying length fibres (up to 25m)& Analysing the error sources using a much longer fibre to better simulate the beam paths that would be used on MAST-U. Attempt to maintain the same error. & 2\\
+                \hline
+                5 & Test on plasma device & Test the system on an actual plasma device to see the variation in density to attempt to characterise the plasma. & 2\\
+                \hline
+                6 & Docume- ntation & Full documentation of work performed and results obtained for use by CCFE and also for handing in of dissertation. & 3\\
+        \hline
+	\end{tabular}
+    \caption{Detailed evaluation of each task that must be undergone for successful completion of the project.}
+    \label{tbl:tasks}
+\end{table}
+\end{center}
 \pagebreak
 \chapter{Bibliography}
 	\printbibliography[heading=none]
